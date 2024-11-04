@@ -1,3 +1,4 @@
+//  Modal/Carousel Functions (Gallery/Portfolio) 
 function openModal(modalId) {
     document.getElementById(modalId).style.display = "block";
     const firstSlide = document.querySelector(`#${modalId} .carousel-img`);
@@ -9,12 +10,6 @@ function closeModal(modalId) {
     const activeSlide = document.querySelector(`#${modalId} .carousel-img.active`);
     if (activeSlide) {
         activeSlide.classList.remove('active');
-    }
-}
-
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.style.display = "none";
     }
 }
 
@@ -35,7 +30,7 @@ function moveSlide(n, modalId) {
     slides[newIndex].classList.add('active');
 }
 
-
+// Tab Functions (About/Skills) 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -65,31 +60,32 @@ function move(barId, targetWidth) {
     }
 }
 
+// Project Sorting Functions (Projects) 
 function toggleSort() {
     const button = document.getElementById('sortButton');
     const projectGrid = document.querySelector('.project-grid');
     const projects = Array.from(document.querySelectorAll('.project-pane'));
     
-    // Toggle sort type
+   
     const currentSort = button.getAttribute('data-sort-type');
     const newSort = currentSort === 'recent' ? 'timeline' : 'recent';
     
-    // Sort projects based on their data-date attribute
+    
     projects.sort((a, b) => {
         const dateA = new Date(a.getAttribute('data-date'));
         const dateB = new Date(b.getAttribute('data-date'));
         return newSort === 'recent' ? dateB - dateA : dateA - dateB;
     });
     
-    // Update button text and state
+   
     button.textContent = `Sort: ${newSort === 'recent' ? 'Most Recent' : 'Timeline'}`;
     button.setAttribute('data-sort-type', newSort);
     
-    // Reappend sorted projects
+    
     projects.forEach(project => projectGrid.appendChild(project));
 }
 
-// Call this when the page loads to ensure initial sort is most recent
+
 window.addEventListener('DOMContentLoaded', () => {
     const projects = Array.from(document.querySelectorAll('.project-pane'));
     const projectGrid = document.querySelector('.project-grid');
@@ -97,8 +93,40 @@ window.addEventListener('DOMContentLoaded', () => {
     projects.sort((a, b) => {
         const dateA = new Date(a.getAttribute('data-date'));
         const dateB = new Date(b.getAttribute('data-date'));
-        return dateB - dateA;  // Most recent first
+        return dateB - dateA;  
     });
     
     projects.forEach(project => projectGrid.appendChild(project));
 });
+
+// Contact Form Functions (Contact) 
+function validateForm(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+   
+    if (!name || !message) {
+        alert('Name and message are required fields');
+        return false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
+        return false;
+    }
+    
+    
+    alert('Form submitted successfully!');
+    return true;
+}
+
+// Global Event Handlers 
+window.onclick = function(event) {
+    if (event.target.classList.contains('modal')) {
+        event.target.style.display = "none";
+    }
+}
