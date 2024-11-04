@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zach Barbarich Portfolio</title>
     <link rel="stylesheet" href="style.css">
-</head>
+ </head>
   <body>
   
     <h4>Navigation Menu</h4>
@@ -16,6 +16,94 @@
       <li class="nav-item"><a class="nav-link" href="skills.html">Skills</a></li>
       <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
     </ul>
+
+    <h2>Skills gathered along the way.</h2>
+
+  <div class="tab">
+    <button class="tablinks active" onclick="openTab(event, 'Languages')">Languages</button>
+    <button class="tablinks" onclick="openTab(event, 'Frameworks')">Frameworks</button>
+    <button class="tablinks" onclick="openTab(event, 'Tools')">Tools</button>
+  </div>
+
+  <div id="Languages" class="tabcontent" style="display: block;">
+    <h3>Languages</h3>
+    <div class="skills-list">
+      <div class="skill-item">
+        <span class="skill-name">Python</span>
+        <div class="progress-container">
+          <div class="progress-bar" id="pythonBar"></div>
+        </div>
+        <button onclick="move('pythonBar', 60)">Show Progress</button>
+      </div>
+
+      <div class="skill-item">
+        <span class="skill-name">JavaScript</span>
+        <div class="progress-container">
+          <div class="progress-bar" id="jsBar"></div>
+        </div>
+        <button onclick="move('jsBar', 75)">Show Progress</button>
+      </div>
+
+      <div class="skill-item">
+        <span class="skill-name">HTML</span>
+        <div class="progress-container">
+          <div class="progress-bar" id="htmlBar"></div>
+        </div>
+        <button onclick="move('htmlBar', 60)">Show Progress</button>
+      </div>
+
+      <div class="skill-item">
+        <span class="skill-name">CSS</span>
+        <div class="progress-container">
+          <div class="progress-bar" id="cssBar"></div>
+        </div>
+        <button onclick="move('cssBar', 65)">Show Progress</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="Frameworks" class="tabcontent">
+    <h3>Frameworks</h3>
+    <p>React<br>
+      Node.js<br>
+    </p>
+  </div>
+
+  <div id="Tools" class="tabcontent">
+    <h3>Tools</h3>
+    <p>Git</p>
+  </div>
+
+  <script>
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+    function move(barId, targetWidth) {
+      var elem = document.getElementById(barId);
+      var width = 0;
+      var id = setInterval(frame, 20);
+      
+      function frame() {
+        if (width >= targetWidth) {
+          clearInterval(id);
+        } else {
+          width++;
+          elem.style.width = width + '%';
+        }
+      }
+    }
+  </script>
+
 
     
   </body>
