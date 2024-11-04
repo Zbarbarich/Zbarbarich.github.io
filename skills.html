@@ -64,14 +64,33 @@
 
   <div id="Frameworks" class="tabcontent">
     <h3>Frameworks</h3>
-    <p>React<br>
-      Node.js<br>
+    <div class="skill-item">
+      <span class="skill-name">Node.js</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="nodeBar"></div>
+      </div>
+      <button onclick="move('nodeBar', 75)">Show Progress</button>
+    </div>
+
+    <div class="skill-item">
+      <span class="skill-name">React</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="reactBar"></div>
+      </div>
+      <button onclick="move('reactBar', 5)">Show Progress</button>
+    </div>
     </p>
   </div>
 
   <div id="Tools" class="tabcontent">
     <h3>Tools</h3>
-    <p>Git</p>
+    <div class="skill-item">
+      <span class="skill-name">Git</span>
+      <div class="progress-container">
+        <div class="progress-bar" id="gitBar"></div>
+      </div>
+      <button onclick="move('gitBar', 60)">Show Progress</button>
+    </div>
   </div>
 
   <script>
