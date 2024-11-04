@@ -35,26 +35,6 @@ function moveSlide(n, modalId) {
     slides[newIndex].classList.add('active');
 }
 
-let ascending = true;
-
-function toggleSort() {
-    ascending = !ascending;
-    const button = document.getElementById('sortButton');
-    button.textContent = `Sort: ${ascending ? 'Oldest First' : 'Most Recent'}`;
-
-    const grid = document.querySelector('.project-grid');
-    const panes = Array.from(grid.getElementsByClassName('project-pane'));
-
-    panes.sort((a, b) => {
-        const dateA = a.getAttribute('data-date');
-        const dateB = b.getAttribute('data-date');
-        return ascending ? 
-            dateA.localeCompare(dateB) : 
-            dateB.localeCompare(dateA);
-    });
-
-    panes.forEach(pane => grid.appendChild(pane));
-}
 
 function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -85,7 +65,40 @@ function move(barId, targetWidth) {
     }
 }
 
-// Add DOMContentLoaded event listener to ensure DOM is loaded before running initial sort
-document.addEventListener('DOMContentLoaded', function() {
-    toggleSort();
+function toggleSort() {
+    const button = document.getElementById('sortButton');
+    const projectGrid = document.querySelector('.project-grid');
+    const projects = Array.from(document.querySelectorAll('.project-pane'));
+    
+    // Toggle sort type
+    const currentSort = button.getAttribute('data-sort-type');
+    const newSort = currentSort === 'recent' ? 'timeline' : 'recent';
+    
+    // Sort projects based on their data-date attribute
+    projects.sort((a, b) => {
+        const dateA = new Date(a.getAttribute('data-date'));
+        const dateB = new Date(b.getAttribute('data-date'));
+        return newSort === 'recent' ? dateB - dateA : dateA - dateB;
+    });
+    
+    // Update button text and state
+    button.textContent = `Sort: ${newSort === 'recent' ? 'Most Recent' : 'Timeline'}`;
+    button.setAttribute('data-sort-type', newSort);
+    
+    // Reappend sorted projects
+    projects.forEach(project => projectGrid.appendChild(project));
+}
+
+// Call this when the page loads to ensure initial sort is most recent
+window.addEventListener('DOMContentLoaded', () => {
+    const projects = Array.from(document.querySelectorAll('.project-pane'));
+    const projectGrid = document.querySelector('.project-grid');
+    
+    projects.sort((a, b) => {
+        const dateA = new Date(a.getAttribute('data-date'));
+        const dateB = new Date(b.getAttribute('data-date'));
+        return dateB - dateA;  // Most recent first
+    });
+    
+    projects.forEach(project => projectGrid.appendChild(project));
 });
