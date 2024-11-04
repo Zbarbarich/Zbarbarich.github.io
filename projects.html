@@ -8,8 +8,8 @@
 </head>
   <body>
   
-    <h4>Navigation Menu</h4>
-  
+      <h4>Zach Barbarich - Full Stack Engineer.</h4>
+    
     <ul class="nav-menu">
       <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
       <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
@@ -17,16 +17,34 @@
       <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
     </ul>
 
+    <div class="sort-container">
+        <button onclick="toggleSort()" id="sortButton">Sort: Most Recent</button>
+    </div>
+
     <div class="project-grid">
         <div class="project-pane">
             <img src="images/project1.png" alt="Project 1" class="project-image">
             <h3>Tiny Search Engine</h3>
+            <p class="project-dates">Oct 2024 - Oct 2024</p>
             <button class="project-button" onclick="openModal('modal1')">Learn More</button>
         </div>
         <div class="project-pane">
             <img src="images/project2.png" alt="Project 2" class="project-image">
             <h3>Tic Tac Toe Web Game</h3>
+            <p class="project-dates">Oct 2024 - Oct 2024</p>
             <button class="project-button" onclick="openModal('modal2')">Learn More</button>
+        </div>
+        <div class="project-pane">
+            <img src="images/project3.png" alt="Project 3" class="project-image">
+            <h3>Sample Project 1</h3>
+            <p class="project-dates">Sep 2024 - Sep 2024</p>
+            <button class="project-button" onclick="openModal('modal3')">Learn More</button>
+        </div>
+        <div class="project-pane">
+            <img src="images/project4.png" alt="Project 4" class="project-image">
+            <h3>Sample Project 2</h3>
+            <p class="project-dates">Nov 2024 - Nov 2024</p>
+            <button class="project-button" onclick="openModal('modal4')">Learn More</button>
         </div>
     </div>
 
@@ -37,9 +55,9 @@
             
             <div class="carousel-container">
                 <div class="carousel-slides">
-                    <img src="images/project1a.png" alt="Code Example A" class="carousel-img">
-                    <img src="images/project1b.png" alt="Code Example B" class="carousel-img">
-                    <img src="images/project1c.png" alt="Code Example C" class="carousel-img">
+                    <img src="images/project1a.png" alt="project1a" class="carousel-img">
+                    <img src="images/project1b.png" alt="project1b" class="carousel-img">
+                    <img src="images/project1c.png" alt="project1c" class="carousel-img">
                 </div>
                 <button class="carousel-btn prev" onclick="moveSlide(-1, 'modal1')">&#10094;</button>
                 <button class="carousel-btn next" onclick="moveSlide(1, 'modal1')">&#10095;</button>
@@ -59,9 +77,9 @@
             
             <div class="carousel-container">
                 <div class="carousel-slides">
-                    <img src="images/project2a.png" alt="Tic Tac Toe Screenshot 1" class="carousel-img">
-                    <img src="images/project2b.png" alt="Tic Tac Toe Screenshot 2" class="carousel-img">
-                    <img src="images/project2c.png" alt="Tic Tac Toe Screenshot 3" class="carousel-img">
+                    <img src="images/project2a.png" alt="project2a" class="carousel-img">
+                    <img src="images/project2b.png" alt="project2b" class="carousel-img">
+                    <img src="images/project2c.png" alt="project2c" class="carousel-img">
                 </div>
                 <button class="carousel-btn prev" onclick="moveSlide(-1, 'modal2')">&#10094;</button>
                 <button class="carousel-btn next" onclick="moveSlide(1, 'modal2')">&#10095;</button>
@@ -71,6 +89,48 @@
                 The Tic Tac Toe Web Game is a simple implementation of the classic game using HTML, CSS, and JavaScript.
                 This project demonstrates basic web development skills and interactive game logic. The game alternates between X and O as players take turns
                 and will display a message when a player wins. If no player wins, the game will display a draw message. 
+            </p>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Sample Project 1</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-slides">
+                    <img src="images/project3a.png" alt="project3a" class="carousel-img">
+                    <img src="images/project3b.png" alt="project3b" class="carousel-img">
+                    <img src="images/project3c.png" alt="project3c" class="carousel-img">
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1, 'modal3')">&#10094;</button>
+                <button class="carousel-btn next" onclick="moveSlide(1, 'modal3')">&#10095;</button>
+            </div>
+            
+            <p class="project-description">
+                Sample Project 1
+            </p>
+        </div>
+    </div>
+
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal4')">&times;</span>
+            <h2>Sample Project 2</h2>
+            
+            <div class="carousel-container">
+                <div class="carousel-slides">
+                    <img src="images/project4a.png" alt="project4a" class="carousel-img">
+                    <img src="images/project4b.png" alt="project4b" class="carousel-img">
+                    <img src="images/project4c.png" alt="project4c" class="carousel-img">
+                </div>
+                <button class="carousel-btn prev" onclick="moveSlide(-1, 'modal4')">&#10094;</button>
+                <button class="carousel-btn next" onclick="moveSlide(1, 'modal4')">&#10095;</button>
+            </div>
+            
+            <p class="project-description">
+                Sample Project 2
             </p>
         </div>
     </div>
@@ -112,6 +172,34 @@
             currentSlide.classList.remove('active');
             slides[newIndex].classList.add('active');
         }
+
+        let isDescending = true; // Start with newest first
+
+        function toggleSort() {
+            isDescending = !isDescending;
+            const button = document.getElementById('sortButton');
+            button.textContent = `Sort: ${isDescending ? 'Most Recent' : 'Timeline'}`;
+            sortProjects();
+        }
+
+        function sortProjects() {
+            const projectGrid = document.querySelector('.project-grid');
+            const projects = Array.from(projectGrid.children);
+            
+            projects.sort((a, b) => {
+                const dateA = new Date(a.querySelector('.project-dates').textContent.split('-')[0]);
+                const dateB = new Date(b.querySelector('.project-dates').textContent.split('-')[0]);
+                
+                return isDescending ? dateB - dateA : dateA - dateB;
+            });
+
+            // Clear and re-append sorted projects
+            projectGrid.innerHTML = '';
+            projects.forEach(project => projectGrid.appendChild(project));
+        }
+
+        // Initial sort on page load
+        sortProjects();
     </script>
   </body>
   </html>
