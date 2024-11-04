@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zach Barbarich Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
   <body>
   
@@ -18,29 +19,29 @@
     </ul>
 
     <div class="sort-container">
-        <button onclick="toggleSort()" id="sortButton">Sort: Most Recent</button>
+        <button onclick="toggleSort()" ontouchend="toggleSort()" id="sortButton">Sort: Most Recent</button>
     </div>
 
     <div class="project-grid">
-        <div class="project-pane">
+        <div class="project-pane" data-date="2024-10">
             <img src="images/project1.png" alt="Project 1" class="project-image">
             <h3>Tiny Search Engine</h3>
             <p class="project-dates">Oct 2024 - Oct 2024</p>
             <button class="project-button" onclick="openModal('modal1')">Learn More</button>
         </div>
-        <div class="project-pane">
+        <div class="project-pane" data-date="2024-10">
             <img src="images/project2.png" alt="Project 2" class="project-image">
             <h3>Tic Tac Toe Web Game</h3>
             <p class="project-dates">Oct 2024 - Oct 2024</p>
             <button class="project-button" onclick="openModal('modal2')">Learn More</button>
         </div>
-        <div class="project-pane">
+        <div class="project-pane" data-date="2024-09">
             <img src="images/project3.png" alt="Project 3" class="project-image">
             <h3>Sample Project 1</h3>
             <p class="project-dates">Sep 2024 - Sep 2024</p>
             <button class="project-button" onclick="openModal('modal3')">Learn More</button>
         </div>
-        <div class="project-pane">
+        <div class="project-pane" data-date="2024-11">
             <img src="images/project4.png" alt="Project 4" class="project-image">
             <h3>Sample Project 2</h3>
             <p class="project-dates">Nov 2024 - Nov 2024</p>
@@ -135,71 +136,6 @@
         </div>
     </div>
 
-    <script>
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-            const firstSlide = document.querySelector(`#${modalId} .carousel-img`);
-            firstSlide.classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-            const activeSlide = document.querySelector(`#${modalId} .carousel-img.active`);
-            if (activeSlide) {
-                activeSlide.classList.remove('active');
-            }
-        }
-
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-            }
-        }
-
-        function moveSlide(n, modalId) {
-            const slides = document.querySelectorAll(`#${modalId} .carousel-img`);
-            const currentSlide = document.querySelector(`#${modalId} .carousel-img.active`);
-            const index = Array.from(slides).indexOf(currentSlide);
-            const totalSlides = slides.length;
-
-            let newIndex;
-            if (n > 0) {
-                newIndex = index === totalSlides - 1 ? 0 : index + 1;
-            } else {
-                newIndex = index === 0 ? totalSlides - 1 : index - 1;
-            }
-
-            currentSlide.classList.remove('active');
-            slides[newIndex].classList.add('active');
-        }
-
-        let isDescending = true; // Start with newest first
-
-        function toggleSort() {
-            isDescending = !isDescending;
-            const button = document.getElementById('sortButton');
-            button.textContent = `Sort: ${isDescending ? 'Most Recent' : 'Timeline'}`;
-            sortProjects();
-        }
-
-        function sortProjects() {
-            const projectGrid = document.querySelector('.project-grid');
-            const projects = Array.from(projectGrid.children);
-            
-            projects.sort((a, b) => {
-                const dateA = new Date(a.querySelector('.project-dates').textContent.split('-')[0]);
-                const dateB = new Date(b.querySelector('.project-dates').textContent.split('-')[0]);
-                
-                return isDescending ? dateB - dateA : dateA - dateB;
-            });
-
-            // Clear and re-append sorted projects
-            projectGrid.innerHTML = '';
-            projects.forEach(project => projectGrid.appendChild(project));
-        }
-
-        // Initial sort on page load
-        sortProjects();
-    </script>
+    
   </body>
   </html>

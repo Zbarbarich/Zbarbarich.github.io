@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zach Barbarich Portfolio</title>
     <link rel="stylesheet" href="style.css">
- </head>
+    <script src="script.js"></script>
+</head>
   <body>
   
     <h4>Zach Barbarich - Full Stack Engineer.</h4>  
@@ -93,35 +94,7 @@
     </div>
   </div>
 
-  <script>
-    function openTab(evt, tabName) {
-      var i, tabcontent, tablinks;
-      tabcontent = document.getElementsByClassName("tabcontent");
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablinks");
-      for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-      document.getElementById(tabName).style.display = "block";
-      evt.currentTarget.className += " active";
-    }
-    function move(barId, targetWidth) {
-      var elem = document.getElementById(barId);
-      var width = 0;
-      var id = setInterval(frame, 20);
-      
-      function frame() {
-        if (width >= targetWidth) {
-          clearInterval(id);
-        } else {
-          width++;
-          elem.style.width = width + '%';
-        }
-      }
-    }
-  </script>
+
 
 
     
